@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2dbbomu4rdcq"]
+
+[ext_resource type="Material" uid="uid://cpg4fmqse0w35" path="res://grass/materials/grass.material" id="1_0bm2w"]
+[ext_resource type="ArrayMesh" uid="uid://dqgl6tdsd71hb" path="res://grass/objs/grass_01_01.obj" id="1_rfpq8"]
+
+[node name="Grass" type="MeshInstance3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = ExtResource("1_0bm2w")
+mesh = ExtResource("1_rfpq8")

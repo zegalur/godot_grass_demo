@@ -1,0 +1,244 @@
+[gd_scene load_steps=10 format=3 uid="uid://qsy14puletyi"]
+
+[ext_resource type="PackedScene" uid="uid://c2dbbomu4rdcq" path="res://grass/grass.tscn" id="1_55v8n"]
+[ext_resource type="Script" path="res://grass_demo.gd" id="1_jtred"]
+[ext_resource type="Material" uid="uid://qpm0mnih202y" path="res://grass/materials/path_texture.material" id="3_o8aj3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2kell"]
+viewport_path = NodePath("PathTexture/SubViewport")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nudar"]
+sky_horizon_color = Color(0.656054, 0.68899, 0.692402, 1)
+ground_bottom_color = Color(0.239216, 0.301961, 0.219608, 1)
+ground_horizon_color = Color(0.656054, 0.68899, 0.692402, 1)
+
+[sub_resource type="Sky" id="Sky_dxw6t"]
+sky_material = SubResource("ProceduralSkyMaterial_nudar")
+
+[sub_resource type="Environment" id="Environment_r1i1s"]
+background_mode = 2
+sky = SubResource("Sky_dxw6t")
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+glow_hdr_threshold = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byx6h"]
+albedo_color = Color(0.239216, 0.301961, 0.219608, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_4go8v"]
+dof_blur_near_enabled = true
+dof_blur_near_distance = 10.24
+dof_blur_near_transition = 7.0
+
+[node name="Demo" type="Node3D"]
+script = ExtResource("1_jtred")
+
+[node name="PathTexture" type="Node3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="PathTexture"]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(256, 256)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="PathTexture/SubViewport"]
+copy_mode = 0
+
+[node name="DrawPath" type="ColorRect" parent="PathTexture/SubViewport"]
+material = ExtResource("3_o8aj3")
+custom_minimum_size = Vector2(256, 256)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="Clear" type="ColorRect" parent="PathTexture/SubViewport"]
+custom_minimum_size = Vector2(256, 256)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.501961, 0, 0.501961, 1)
+
+[node name="PathPreview" type="TextureRect" parent="PathTexture"]
+custom_minimum_size = Vector2(256, 256)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_2kell")
+
+[node name="Label" type="Label" parent="PathTexture/PathPreview"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Path Texture"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.280667, -0.785264, 0.551893, 0, 0.575005, 0.81815, -0.959805, -0.229627, 0.161385, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r1i1s")
+
+[node name="Grass" type="Node3D" parent="."]
+
+[node name="Grass01" parent="Grass" instance=ExtResource("1_55v8n")]
+skeleton = NodePath("../..")
+
+[node name="Grass02" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 4, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Grass06" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 8, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Grass07" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 13.445, 0, -0.140478)
+skeleton = NodePath("../..")
+
+[node name="Grass03" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Grass04" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Grass05" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -12, 0, 0)
+skeleton = NodePath("../..")
+
+[node name="Grass08" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 4)
+skeleton = NodePath("../..")
+
+[node name="Grass09" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 4, 0, 4)
+skeleton = NodePath("../..")
+
+[node name="Grass10" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 8, 0, 4)
+skeleton = NodePath("../..")
+
+[node name="Grass11" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 12, 0, 4)
+skeleton = NodePath("../..")
+
+[node name="Grass12" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 0, 4)
+skeleton = NodePath("../..")
+
+[node name="Grass13" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8, 0, 4)
+skeleton = NodePath("../..")
+
+[node name="Grass14" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-1.14658, 0, 1.6387, 0, 2, 0, -1.6387, 0, -1.14658, -12.3222, 9.53674e-07, 4.55229)
+skeleton = NodePath("../..")
+
+[node name="Grass15" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 8)
+skeleton = NodePath("../..")
+
+[node name="Grass16" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 4, 0, 8)
+skeleton = NodePath("../..")
+
+[node name="Grass17" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 8, 0, 8)
+skeleton = NodePath("../..")
+
+[node name="Grass18" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 12, 0, 8)
+skeleton = NodePath("../..")
+
+[node name="Grass19" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -4.03941, -9.53674e-07, 8.46951)
+skeleton = NodePath("../..")
+
+[node name="Grass20" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8, 0, 8)
+skeleton = NodePath("../..")
+
+[node name="Grass21" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-1.73205, 0, 1, 0, 2, 0, -1, 0, -1.73205, -14.0053, 0, 8.57924)
+skeleton = NodePath("../..")
+
+[node name="Grass22" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -4)
+skeleton = NodePath("../..")
+
+[node name="Grass23" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 4, 0, -4)
+skeleton = NodePath("../..")
+
+[node name="Grass24" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 8, 0, -4)
+skeleton = NodePath("../..")
+
+[node name="Grass25" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 12, 0, -4)
+skeleton = NodePath("../..")
+
+[node name="Grass26" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 0, -4)
+skeleton = NodePath("../..")
+
+[node name="Grass27" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8, 0, -4)
+skeleton = NodePath("../..")
+
+[node name="Grass28" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -12, 0, -4)
+skeleton = NodePath("../..")
+
+[node name="Grass29" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, -8)
+skeleton = NodePath("../..")
+
+[node name="Grass30" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 4, 0, -8)
+skeleton = NodePath("../..")
+
+[node name="Grass31" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-0.638944, 0, 1.89519, 0, 2, 0, -1.89519, 0, -0.638944, 8.13419, 0, -9.10238)
+skeleton = NodePath("../..")
+
+[node name="Grass32" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-1, 0, -1.73205, 0, 2, 0, 1.73205, 0, -1, 13.1296, 0, -9.51714)
+skeleton = NodePath("../..")
+
+[node name="Grass33" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -4, 0, -8)
+skeleton = NodePath("../..")
+
+[node name="Grass34" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -8, 0, -8)
+skeleton = NodePath("../..")
+
+[node name="Grass35" parent="Grass" instance=ExtResource("1_55v8n")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, -12, 0, -8)
+skeleton = NodePath("../..")
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_byx6h")
+metadata/_edit_lock_ = true
+
+[node name="Player" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+radius = 1.0
+radial_segments = 32
+rings = 16
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(0.999962, 0.00681488, -0.00542968, 0, 0.623139, 0.782111, 0.00871344, -0.782082, 0.623115, 0.396729, 8.55628, 8.6689)
+attributes = SubResource("CameraAttributesPractical_4go8v")
